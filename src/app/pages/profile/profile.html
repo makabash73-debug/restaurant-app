@@ -1,0 +1,139 @@
+<section class="profile-page">
+  <h1>Profile Settings</h1>
+
+  @if (loading()) {
+    <p>Loading profile...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="error-message">{{ errorMessage() }}</p>
+  }
+
+  @if (user(); as userData) {
+    <div class="profile-tabs">
+      <button
+        type="button"
+        [class.active]="activeTab() === 'personal'"
+        (click)="showPersonalInfo()"
+      >
+        Personal Info
+      </button>
+
+      <button
+        type="button"
+        [class.active]="activeTab() === 'password'"
+        (click)="showChangePassword()"
+      >
+        Change Password
+      </button>
+
+      <button
+        type="button"
+        [class.active]="activeTab() === 'account'"
+        (click)="showAccountSettings()"
+      >
+        Account Settings
+      </button>
+    </div>
+
+    @if (activeTab() === 'personal') {
+      <div class="profile-card">
+        <h2>Personal Information</h2>
+        <p class="profile-subtitle">Update your personal details</p>
+
+        <div class="avatar">
+          @if (userData.image) {
+            <img [src]="userData.image" [alt]="userData.firstName || 'User'" />
+          } @else {
+            <span>User</span>
+          }
+        </div>
+
+        <label>
+          Picture
+          <input type="text" [value]="userData.image || ''" readonly />
+        </label>
+
+        <div class="form-row">
+          <label>
+            First Name
+            <input type="text" [value]="userData.firstName || ''" readonly />
+          </label>
+
+          <label>
+            Last Name
+            <input type="text" [value]="userData.lastName || ''" readonly />
+          </label>
+        </div>
+
+        <label>
+          Email
+          <input type="email" [value]="userData.email || ''" readonly />
+        </label>
+
+        <label>
+          Phone Number
+          <input type="text" [value]="userData.phoneNumber || ''" readonly />
+        </label>
+
+        <label>
+          Address
+          <textarea readonly>{{ userData.address || '' }}</textarea>
+        </label>
+
+        <label>
+          Age
+          <input type="number" [value]="userData.age || ''" readonly />
+        </label>
+      </div>
+    }
+
+    @if (activeTab() === 'password') {
+      <div class="profile-card">
+        <h2>Change Password</h2>
+        <p class="profile-subtitle">Update your password</p>
+
+        <label>
+          Current Password
+          <input type="password" />
+        </label>
+
+        <label>
+          New Password
+          <input type="password" />
+        </label>
+
+        <label>
+          Confirm New Password
+          <input type="password" />
+        </label>
+
+        <ul class="password-rules">
+          <li>At least 8 characters</li>
+          <li>Uppercase and lowercase letters</li>
+          <li>At least one number</li>
+        </ul>
+
+        <button type="button" class="primary-button">
+          Update Password
+        </button>
+      </div>
+    }
+
+    @if (activeTab() === 'account') {
+      <div class="profile-card">
+        <h2>Account Settings</h2>
+        <p class="profile-subtitle">Manage your account</p>
+
+        <div class="danger-zone">
+          <h3>Danger Zone</h3>
+          <p>Once you delete your account, there is no going back. Please be certain.</p>
+
+          <button type="button" class="danger-button">
+            Delete My Account
+          </button>
+        </div>
+      </div>
+    }
+  }
+</section>

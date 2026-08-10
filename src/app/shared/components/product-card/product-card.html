@@ -1,0 +1,35 @@
+<article class="product-card">
+  <a [routerLink]="['/product', product().id]">
+    <img [src]="product().image" [alt]="product().name" />
+  </a>
+
+  <div class="product-info">
+    <h3>{{ product().name }}</h3>
+
+    <p class="description">
+      {{ product().description }}
+    </p>
+
+    <div class="meta">
+      <span>Spiciness: {{ product().spiciness }}</span>
+      <span>Rating: {{ product().rate }}</span>
+    </div>
+
+    <div class="bottom">
+      <strong>{{ product().price }} ₾</strong>
+
+      <button type="button" (click)="addToCart()">
+        @if (loading()) { 
+         Adding...
+       } @else {  
+        Add to Cart
+       }   
+      </button>
+    </div>
+      
+    @if (message()) {
+      <p class="card-message">{{ message() }}</p>
+    }
+    
+  </div>
+</article>

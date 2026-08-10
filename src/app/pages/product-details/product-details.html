@@ -1,0 +1,101 @@
+@if (product(); as productData) {
+  <section class="product-details-page">
+
+    <div class="product-details-container">
+
+      <div class="product-details-image">
+        <img
+          [src]="productData.image"
+          [alt]="productData.name"
+        />
+      </div>
+
+      <div class="product-details-info">
+
+        <h1>{{ productData.name }}</h1>
+
+        <div class="rating-row">
+          <span class="stars">★ ★ ★ ★ ★</span>
+          <span>({{ productData.rate }} rating)</span>
+        </div>
+
+        <p class="product-price">
+          {{ productData.price }} ₾
+        </p>
+
+        @if (productData.vegetarian) {
+         <span class="vegetarian-badge">Vegetarian</span>
+        }
+
+        <p class="description">
+          {{ productData.description }}
+        </p>
+
+        <div class="ingredients-section">
+          <h3>Ingredients:</h3>
+
+          <ul>
+            @for (ingredient of productData.ingredients; track ingredient) {
+              <li>{{ ingredient }}</li>
+            }
+          </ul>
+        </div>
+        
+        <div class="method-section">
+          <h3>Preparation Method:</h3>
+
+          <p>{{ productData.method }}</p>
+        </div>
+
+          <div class="quantity-controls">
+            <button
+              type="button"
+              (click)="decreaseQuantity()"
+              [disabled]="quantity() === 1"
+            >
+              -
+            </button>
+
+            <span>{{ quantity() }}</span>
+
+            <button
+              type="button"
+              (click)="increaseQuantity()"
+            >
+              +
+            </button>
+          </div>
+
+        <button
+          type="button"
+          class="add-to-cart-button"
+          (click)="addToCart()"
+          [disabled]="loading()"
+        >
+          {{ loading() ? 'Adding...' : 'Add to Cart' }}
+        </button>
+
+        @if (message()) {
+          <p class="product-message">
+            {{ message() }}
+          </p>
+        }
+
+      </div>
+
+    </div>
+
+    @if (relatedProducts().length > 0) {
+      <section class="related-products">
+        <h2>You May Also Like</h2>
+
+        <div class="related-products-grid">
+          @for (relatedProduct of relatedProducts(); track relatedProduct.id) {
+            <app-product-card [product]="relatedProduct"></app-product-card>
+          }
+        </div>
+      </section>
+    }
+
+  </section>
+}

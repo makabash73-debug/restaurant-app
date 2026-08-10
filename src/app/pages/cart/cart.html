@@ -1,0 +1,142 @@
+<section class="cart-page">
+
+  <div class="cart-header">
+    <h1>Shopping Cart</h1>
+
+    @if (cart(); as cartData) {
+      <p>{{ cartData.data.totalItems }} items in your cart</p>
+    }
+  </div>
+
+  @if (loading()) {
+    <p class="cart-message">Loading cart...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="cart-error">{{ errorMessage() }}</p>
+  }
+
+  @if (cart(); as cartData) {
+
+    @if (cartData.data.items.length > 0) {
+
+      <div class="cart-layout">
+
+        <!-- LEFT SIDE -->
+        <div class="cart-list">
+
+          @for (item of cartData.data.items; track item.id) {
+
+            <article class="cart-item">
+
+              <img
+                [src]="item.product.image"
+                [alt]="item.product.name"
+              />
+
+              <div class="cart-item-info">
+
+                <h3>{{ item.product.name }}</h3>
+
+                <p class="cart-description">
+                  {{ item.product.description }}
+                </p>
+
+                <div class="cart-item-bottom">
+
+                  <div class="quantity-controls">
+
+                    <button
+                      type="button"
+                      [disabled]="item.quantity === 1"
+                      (click)="changeQuantity(item.id, item.quantity - 1)"
+                    >
+                      −
+                    </button>
+
+                    <span>{{ item.quantity }}</span>
+
+                    <button
+                      type="button"
+                      (click)="changeQuantity(item.id, item.quantity + 1)"
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                  <strong class="item-price">
+                    {{ item.product.price * item.quantity }} ₾
+                  </strong>
+
+                  <button
+                    type="button"
+                    class="remove-button"
+                    (click)="removeItem(item.id)"
+                    aria-label="Remove item"
+                  >
+                    🗑
+                  </button>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <aside class="order-summary">
+
+          <h2>Order Summary</h2>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>{{ cartData.data.totalPrice }} ₾</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Tax (10%)</span>
+            <span>
+              {{ (cartData.data.totalPrice * 0.10).toFixed(2) }} ₾
+            </span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row total-row">
+            <strong>Total</strong>
+
+            <strong>
+              {{ (cartData.data.totalPrice * 1.10).toFixed(2) }} ₾
+            </strong>
+          </div>
+
+          <button
+            type="button"
+            class="checkout-button"
+            (click)="checkout()"
+          >
+            Proceed to Checkout
+          </button>
+
+        </aside>
+
+      </div>
+
+    } @else {
+
+      <div class="empty-cart">
+        <h2>Your cart is empty</h2>
+        <p>Add some delicious food from our menu.</p>
+      </div>
+
+    }
+
+  }
+
+</section>

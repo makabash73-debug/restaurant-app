@@ -1,0 +1,225 @@
+<section class="menu-page">
+
+  <aside class="filters-panel">
+
+    <h2>Filters</h2>
+
+    <div class="filter-group">
+      <label class="filter-title">Search</label>
+
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Search dishes..."
+          (input)="onSearchChange($event)"
+        />
+
+        <button
+          type="button"
+          (click)="searchProducts()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+
+
+    <div class="filter-group">
+      <h3>Categories</h3>
+
+      <button
+        type="button"
+        class="category-filter"
+        [class.active]="selectedCategoryId() === null"
+        (click)="selectAllCategories()"
+      >
+        <span class="category-check"></span>
+        All Categories
+      </button>
+
+      @for (category of categories(); track category.id) {
+        <button
+          type="button"
+          class="category-filter"
+          [class.active]="selectedCategoryId() === category.id"
+          (click)="selectCategory(category.id)"
+        >
+          <span class="category-check"></span>
+          {{ category.name }}
+        </button>
+      }
+    </div>
+
+
+    <div class="filter-group vegetarian-group">
+
+      <span class="filter-title">
+        Vegetarian Only
+      </span>
+
+      <label class="switch">
+        <input
+          type="checkbox"
+          [checked]="vegetarianOnly()"
+          (change)="toggleVegetarian($event)"
+        />
+
+        <span class="switch-slider"></span>
+      </label>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label
+        class="filter-title"
+        for="spiciness"
+      >
+        Spiciness (0-5)
+      </label>
+
+      <input
+        id="spiciness"
+        class="range-input"
+        type="range"
+        min="0"
+        max="5"
+        step="1"
+        [value]="selectedSpiciness() ?? 0"
+        (change)="filterBySpiciness($event)"
+      />
+
+      <p class="filter-value">
+        Level:
+        {{ selectedSpiciness() ?? 'not selected' }}
+      </p>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label
+        class="filter-title"
+        for="rate"
+      >
+        Minimum Rating
+      </label>
+
+      <input
+        id="rate"
+        class="range-input"
+        type="range"
+        min="0"
+        max="5"
+        step="0.5"
+        [value]="selectedRate() ?? 0"
+        (change)="filterByRate($event)"
+      />
+
+      <p class="filter-value">
+        ★ {{ selectedRate() ?? '0.0' }}+
+      </p>
+
+    </div>
+
+
+    <div class="filter-group price-filter">
+
+      <label
+        class="filter-title"
+        for="minPrice"
+      >
+        Min price
+      </label>
+
+      <input
+        id="minPrice"
+        class="range-input"
+        type="range"
+        min="0"
+        max="50"
+        step="1"
+        [value]="minPrice()"
+        (change)="onMinPriceChange($event)"
+      />
+
+      <p class="filter-value">
+        {{ minPrice() }} ₾
+      </p>
+
+
+      <label
+        class="filter-title max-price-title"
+        for="maxPrice"
+      >
+        Max price
+      </label>
+
+      <input
+        id="maxPrice"
+        class="range-input"
+        type="range"
+        min="0"
+        max="50"
+        step="1"
+        [value]="maxPrice()"
+        (change)="onMaxPriceChange($event)"
+      />
+
+      <p class="filter-value">
+        {{ maxPrice() }} ₾
+      </p>
+
+
+      <button
+        type="button"
+        class="apply-price-button"
+        (click)="filterByPrice()"
+      >
+        Apply Price
+      </button>
+
+    </div>
+
+  </aside>
+
+
+
+  <main class="menu-content">
+
+    <div class="menu-heading">
+      <div>
+        <h1>Menu</h1>
+        <p>Choose your favorite dish</p>
+      </div>
+    </div>
+
+
+    @if (loading()) {
+      <p class="status-message">
+        Loading products...
+      </p>
+    }
+
+    @if (errorMessage()) {
+      <p class="error-message">
+        {{ errorMessage() }}
+      </p>
+    }
+
+
+    <div class="products-grid">
+
+      @for (product of products(); track product.id) {
+        <app-product-card
+          [product]="product"
+        />
+      }
+
+    </div>
+
+  </main>
+
+</section>

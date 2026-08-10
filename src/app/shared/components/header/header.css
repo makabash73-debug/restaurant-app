@@ -1,0 +1,237 @@
+.site-header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  height: 72px;
+
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+
+/* LOGO */
+
+.logo {
+  color: #ff6333;
+
+  font-size: 26px;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+
+/* NAVIGATION */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav a,
+.logout-button {
+  color: #333333;
+
+  font-size: 15px;
+  font-family: inherit;
+
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.nav a:hover,
+.logout-button:hover {
+  color: #ff6333;
+}
+
+.nav a.active {
+  color: #ff6333;
+}
+
+
+/* CART / PROFILE */
+
+.cart-link,
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-icon,
+.profile-icon {
+  font-size: 19px;
+}
+
+.profile-link {
+  padding: 7px 10px;
+  border-radius: 7px;
+}
+
+.profile-link:hover {
+  background: #fff1ec;
+}
+
+
+/* LOGOUT */
+
+.logout-button {
+  border: none;
+  background: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
+
+/* BURGER */
+
+.menu-toggle {
+  display: none;
+}
+
+.burger {
+  display: none;
+
+  width: 30px;
+
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+
+  width: 100%;
+  height: 3px;
+
+  margin: 5px 0;
+
+  background: #222222;
+
+  border-radius: 3px;
+
+  transition: 0.2s;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .nav {
+    gap: 14px;
+  }
+
+  .nav a,
+  .logout-button {
+    font-size: 14px;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 750px) {
+
+  .header-container {
+    height: 65px;
+    padding: 0 18px;
+  }
+
+  .logo {
+    font-size: 23px;
+  }
+
+  .burger {
+    display: block;
+  }
+
+  .nav {
+    display: none;
+
+    position: absolute;
+
+    top: 65px;
+    left: 0;
+    right: 0;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 0;
+
+    padding: 14px 22px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav a,
+  .logout-button {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 0;
+
+    font-size: 16px;
+
+    text-align: left;
+  }
+
+  .cart-link,
+  .profile-link {
+    display: flex;
+  }
+
+  .profile-link {
+    padding: 12px 0;
+  }
+
+  .link-text {
+    display: inline;
+  }
+
+
+  /* OPEN MENU */
+
+  .menu-toggle:checked ~ .nav {
+    display: flex;
+  }
+
+
+  /* BURGER TO X */
+
+  .menu-toggle:checked + .burger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-toggle:checked + .burger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle:checked + .burger span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

@@ -1,0 +1,84 @@
+<section class="hero">
+  <div class="hero-content">
+    <h1>Delicious Food Delivered to Your Door</h1>
+
+    <p>
+      Fresh ingredients, authentic flavors, fast delivery
+    </p>
+
+    <a routerLink="/menu" class="hero-button">
+      Order Now
+    </a>
+  </div>
+</section>
+
+
+<section class="popular-section">
+
+  <div class="popular-heading">
+    <div>
+      <h2>Popular Dishes</h2>
+      <p>Discover some of our customers' favorite dishes</p>
+    </div>
+
+    <a routerLink="/menu" class="view-menu">
+      View Full Menu →
+    </a>
+  </div>
+
+
+  @if (loading()) {
+    <p class="status-message">
+      Loading popular dishes...
+    </p>
+  }
+
+  @if (errorMessage()) {
+    <p class="error-message">
+      {{ errorMessage() }}
+    </p>
+  }
+
+
+  <div class="popular-grid">
+
+    @for (product of popularProducts(); track product.id) {
+      <app-product-card [product]="product" />
+    }
+
+  </div>
+
+</section>
+
+<section class="story-section">
+  <div class="story-container">
+
+    <div class="story-image">
+      <img
+        src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=1200&q=80"
+        alt="Chef preparing food"
+      />
+    </div>
+
+    <div class="story-content">
+      <h2>Our Story</h2>
+
+      <p>
+        At Foodie, we believe that great food brings people together.
+        Our chefs use only the freshest ingredients to create dishes
+        that delight your taste buds and warm your heart.
+      </p>
+
+      <p>
+        From traditional recipes passed down through generations to
+        innovative modern cuisine, every dish is crafted with passion
+        and care. We're committed to delivering not just meals, but
+        memorable dining experiences right to your door.
+      </p>
+
+      <a routerLink="/menu" class="story-button">
+        Explore Our Menu
+      </a>
+    </div>
+
+  </div>

@@ -1,0 +1,71 @@
+<header class="site-header">
+  <div class="header-container">
+
+    <a class="logo" routerLink="/home">
+      Foodie
+    </a>
+
+    <input
+      type="checkbox"
+      id="menu-toggle"
+      name="menu-toggle"
+      class="menu-toggle"
+      aria-label="Toggle navigation menu"
+    />
+
+    <label for="menu-toggle" class="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav class="nav">
+
+      <a routerLink="/home" routerLinkActive="active">
+        Home
+      </a>
+
+      <a routerLink="/menu" routerLinkActive="active">
+        Menu
+      </a>
+
+      <a routerLink="/login" routerLinkActive="active">
+        Login
+      </a>
+
+      <a routerLink="/register" routerLinkActive="active">
+        Register
+      </a>
+
+      <a
+        class="cart-link"
+        routerLink="/cart"
+        routerLinkActive="active"
+      >
+        🛒
+        <span class="link-text">Cart</span>
+      </a>
+
+      <a
+        class="profile-link"
+        routerLink="/profile"
+        routerLinkActive="active"
+      >
+        👤
+        <span class="link-text">Profile</span>
+      </a>
+
+      <button
+        type="button"
+        class="logout-button"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+
+    </nav>
+
+  </div>
+</header>
+
+

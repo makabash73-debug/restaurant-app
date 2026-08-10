@@ -1,0 +1,76 @@
+<section class="auth-page">
+  <div class="auth-card">
+
+    <div class="auth-heading">
+      <h1>Create Account</h1>
+      <p>Join Foodie and start ordering</p>
+    </div>
+
+    <div class="name-row">
+
+      <label>
+        First Name
+        <input
+          type="text"
+          placeholder="First name"
+          (input)="onFirstNameChange($event)"
+        />
+      </label>
+
+      <label>
+        Last Name
+        <input
+          type="text"
+          placeholder="Last name"
+          (input)="onLastNameChange($event)"
+        />
+      </label>
+
+    </div>
+
+    <label>
+      Email
+      <input
+        type="email"
+        placeholder="Enter your email"
+        (input)="onEmailChange($event)"
+      />
+    </label>
+
+    <label>
+      Password
+      <input
+        type="password"
+        placeholder="Enter your password"
+        (input)="onPasswordChange($event)"
+      />
+    </label>
+
+    @if (errorMessage()) {
+      <p class="error-message">
+        {{ errorMessage() }}
+      </p>
+    }
+
+    @if (successMessage()) {
+      <p class="success-message">
+        {{ successMessage() }}
+      </p>
+    }
+
+    <button
+      type="button"
+      class="auth-button"
+      (click)="register()"
+      [disabled]="loading()"
+    >
+      {{ loading() ? 'Creating account...' : 'Register' }}
+    </button>
+
+    <p class="auth-footer-text">
+      Already have an account?
+      <a href="/login">Login</a>
+    </p>
+
+  </div>
+</section>
