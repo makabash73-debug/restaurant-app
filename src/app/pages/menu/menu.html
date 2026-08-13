@@ -11,6 +11,7 @@
         <input
           type="text"
           placeholder="Search dishes..."
+          [value]="searchText()"
           (input)="onSearchChange($event)"
         />
 
@@ -20,6 +21,15 @@
         >
           Search
         </button>
+
+        <button
+          type="button"
+          class="clear-button"
+          (click)="clearFilters()"
+        >
+          Clear
+        </button>
+
       </div>
     </div>
 

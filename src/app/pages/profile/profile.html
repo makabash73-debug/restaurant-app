@@ -1,4 +1,5 @@
 <section class="profile-page">
+
   <h1>Profile Settings</h1>
 
   @if (loading()) {
@@ -6,11 +7,15 @@
   }
 
   @if (errorMessage()) {
-    <p class="error-message">{{ errorMessage() }}</p>
+    <p class="error-message">
+      {{ errorMessage() }}
+    </p>
   }
 
   @if (user(); as userData) {
+
     <div class="profile-tabs">
+
       <button
         type="button"
         [class.active]="activeTab() === 'personal'"
@@ -34,79 +39,194 @@
       >
         Account Settings
       </button>
+
     </div>
 
+
     @if (activeTab() === 'personal') {
+
       <div class="profile-card">
+
         <h2>Personal Information</h2>
-        <p class="profile-subtitle">Update your personal details</p>
+
+        <p class="profile-subtitle">
+          Update your personal details
+        </p>
+
 
         <div class="avatar">
-          @if (userData.image) {
-            <img [src]="userData.image" [alt]="userData.firstName || 'User'" />
+
+          @if (picture()) {
+
+            <img
+              [src]="picture()"
+              [alt]="firstName() || 'User'"
+            />
+
           } @else {
+
             <span>User</span>
+
           }
+
         </div>
+
 
         <label>
           Picture
-          <input type="text" [value]="userData.image || ''" readonly />
+
+          <input
+            type="text"
+            [value]="picture()"
+            (input)="onPictureChange($event)"
+          />
         </label>
 
+
         <div class="form-row">
+
           <label>
             First Name
-            <input type="text" [value]="userData.firstName || ''" readonly />
+
+            <input
+              type="text"
+              [value]="firstName()"
+              (input)="onFirstNameChange($event)"
+            />
           </label>
+
 
           <label>
             Last Name
-            <input type="text" [value]="userData.lastName || ''" readonly />
+
+            <input
+              type="text"
+              [value]="lastName()"
+              (input)="onLastNameChange($event)"
+            />
           </label>
+
         </div>
+
 
         <label>
           Email
-          <input type="email" [value]="userData.email || ''" readonly />
+
+          <input
+            type="email"
+            [value]="userData.email || ''"
+            readonly
+          />
         </label>
+
 
         <label>
           Phone Number
-          <input type="text" [value]="userData.phoneNumber || ''" readonly />
+
+          <input
+            type="text"
+            [value]="phoneNumber()"
+            (input)="onPhoneNumberChange($event)"
+          />
         </label>
+
 
         <label>
           Address
-          <textarea readonly>{{ userData.address || '' }}</textarea>
+
+          <textarea
+            [value]="address()"
+            (input)="onAddressChange($event)"
+          ></textarea>
         </label>
+
 
         <label>
           Age
-          <input type="number" [value]="userData.age || ''" readonly />
+
+          <input
+            type="number"
+            [value]="age() ?? ''"
+            (input)="onAgeChange($event)"
+          />
         </label>
+
+
+        @if (profileError()) {
+          <p class="error-message">
+            {{ profileError() }}
+          </p>
+        }
+
+
+        @if (profileMessage()) {
+          <p class="success-message">
+            {{ profileMessage() }}
+          </p>
+        }
+
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="updateProfile()"
+          [disabled]="profileLoading()"
+        >
+          @if (profileLoading()) {
+            Saving...
+          } @else {
+            Save Changes
+          }
+        </button>
+
       </div>
+
     }
 
+
     @if (activeTab() === 'password') {
+
       <div class="profile-card">
+
         <h2>Change Password</h2>
-        <p class="profile-subtitle">Update your password</p>
+
+        <p class="profile-subtitle">
+          Update your password
+        </p>
+
 
         <label>
           Current Password
-          <input type="password" />
+
+          <input
+            type="password"
+            [value]="oldPassword()"
+            (input)="onOldPasswordChange($event)"
+          />
         </label>
+
 
         <label>
           New Password
-          <input type="password" />
+
+          <input
+            type="password"
+            [value]="newPassword()"
+            (input)="onNewPasswordChange($event)"
+          />
         </label>
+
 
         <label>
           Confirm New Password
-          <input type="password" />
+
+          <input
+            type="password"
+            [value]="confirmPassword()"
+            (input)="onConfirmPasswordChange($event)"
+          />
         </label>
+
 
         <ul class="password-rules">
           <li>At least 8 characters</li>
@@ -114,26 +234,73 @@
           <li>At least one number</li>
         </ul>
 
-        <button type="button" class="primary-button">
-          Update Password
+
+        @if (passwordError()) {
+          <p class="error-message">
+            {{ passwordError() }}
+          </p>
+        }
+
+
+        @if (passwordMessage()) {
+          <p class="success-message">
+            {{ passwordMessage() }}
+          </p>
+        }
+
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="changePassword()"
+          [disabled]="passwordLoading()"
+        >
+          @if (passwordLoading()) {
+            Updating...
+          } @else {
+            Update Password
+          }
         </button>
+
       </div>
+
     }
+
 
     @if (activeTab() === 'account') {
+
       <div class="profile-card">
+
         <h2>Account Settings</h2>
-        <p class="profile-subtitle">Manage your account</p>
+
+        <p class="profile-subtitle">
+          Manage your account
+        </p>
+
 
         <div class="danger-zone">
-          <h3>Danger Zone</h3>
-          <p>Once you delete your account, there is no going back. Please be certain.</p>
 
-          <button type="button" class="danger-button">
+          <h3>Danger Zone</h3>
+
+          <p>
+            Once you delete your account, there is no going back.
+            Please be certain.
+          </p>
+
+          <button
+            type="button"
+            class="danger-button"
+            (click)="deleteAccount()"
+          >
             Delete My Account
           </button>
+
         </div>
+
       </div>
+
     }
+
   }
+
 </section>

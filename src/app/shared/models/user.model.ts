@@ -23,7 +23,13 @@ export interface EditUserRequest {
   firstName: string | null;
   lastName: string | null;
   phoneNumber: string | null;
+  picture: string | null;
   address: string | null;
   age: number | null;
-  image: string | null;
+}
+
+export interface ChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 }

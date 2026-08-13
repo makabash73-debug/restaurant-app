@@ -85,6 +85,25 @@
   background: #ef5528;
 }
 
+/* CLEAR BUTTON */
+
+.search-box .clear-button {
+  width: 100%;
+  margin-top: 2px;
+  padding: 10px;
+  border: 1px solid #ff6333;
+  border-radius: 7px;
+  background: white;
+  color: #ff6333;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-box .clear-button:hover {
+  background: #fff1ec;
+  color: #ff6333;
+}
+
 
 /* CATEGORIES */
 
@@ -300,6 +319,8 @@
   margin-bottom: 24px;
   color: #dc2626;
 }
+
+
 
 
 /* RESPONSIVE */
