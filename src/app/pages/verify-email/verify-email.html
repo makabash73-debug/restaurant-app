@@ -1,0 +1,72 @@
+<section class="verify-page">
+
+  <div class="verify-card">
+
+    <h1>Verify Email</h1>
+
+    <p class="verify-subtitle">
+      Enter the verification code sent to your email
+    </p>
+
+    <p class="email-text">
+      {{ email() }}
+    </p>
+
+    <label>
+      Verification Code
+
+      <input
+        type="text"
+        placeholder="Enter verification code"
+        [value]="code()"
+        (input)="onCodeChange($event)"
+      />
+    </label>
+
+
+    @if (errorMessage()) {
+      <p class="error-message">
+        {{ errorMessage() }}
+      </p>
+    }
+
+
+    @if (successMessage()) {
+      <p class="success-message">
+        {{ successMessage() }}
+      </p>
+    }
+
+
+    @if (resendMessage()) {
+      <p class="success-message">
+        {{ resendMessage() }}
+      </p>
+    }
+
+
+    <button
+      type="button"
+      class="verify-button"
+      (click)="verifyEmail()"
+      [disabled]="loading()"
+    >
+      @if (loading()) {
+        Verifying...
+      } @else {
+        Verify Email
+      }
+    </button>
+
+
+    <button
+      type="button"
+      class="resend-button"
+      (click)="resendCode()"
+    >
+      Resend Code
+    </button>
+
+  </div>
+
+</section>

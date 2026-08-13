@@ -9,18 +9,20 @@ import { Router } from '@angular/router';
   styleUrl: './register.css'
 })
 export class Register {
+
   firstName = signal('');
   lastName = signal('');
   email = signal('');
   password = signal('');
+
   loading = signal(false);
   errorMessage = signal('');
   successMessage = signal('');
 
   constructor(
-  private authService: Auth,
-  private router: Router
-) {}
+    private authService: Auth,
+    private router: Router
+  ) {}
 
   onFirstNameChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -53,16 +55,26 @@ export class Register {
       email: this.email(),
       password: this.password()
     }).subscribe({
-      next: (response) => {
+      next: () => {
         this.successMessage.set('Registration successful');
         this.loading.set(false);
-        this.router.navigate(['/login']);
+
+        this.router.navigate(
+          ['/verify-email'],
+          {
+            queryParams: {
+              email: this.email()
+            }
+          }
+        );
       },
+
       error: (err) => {
         console.log(err);
 
         this.errorMessage.set(
-          err.error?.detail || 'Registration failed'
+          err.error?.detail ||
+          'Registration failed'
         );
 
         this.loading.set(false);

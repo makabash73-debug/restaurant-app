@@ -18,3 +18,17 @@ export interface LoginResponse {
   };
   meta: unknown;
 }
+
+export interface VerifyEmailRequest {
+  email: string;
+  code: string;
+}
+
+export interface VerifyEmailResponse {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+    isVerified: boolean;
+  };
+  meta: unknown;
+}

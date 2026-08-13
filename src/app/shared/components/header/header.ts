@@ -2,7 +2,8 @@ import { Component, OnInit, signal } from '@angular/core';
 import {
   Router,
   RouterLink,
-  RouterLinkActive
+  RouterLinkActive,
+  NavigationEnd
 } from '@angular/router';
 
 import { Users } from '../../../core/services/users';
@@ -32,7 +33,9 @@ export class Header implements OnInit {
     this.refreshHeader();
 
     this.router.events.subscribe(() => {
+      if (event instanceof NavigationEnd) {
       this.refreshHeader();
+      }
     });
   }
 
