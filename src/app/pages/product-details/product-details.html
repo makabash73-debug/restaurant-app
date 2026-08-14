@@ -15,8 +15,23 @@
         <h1>{{ productData.name }}</h1>
 
         <div class="rating-row">
-          <span class="stars">★ ★ ★ ★ ★</span>
-          <span>({{ productData.rate }} rating)</span>
+          <span class="stars">
+
+            @for (star of [1, 2, 3, 4, 5]; track star) {
+
+              @if (productData.rate >= star) {
+                <span class="filled-star">★</span>
+              } @else {
+                <span class="empty-star">☆</span>
+              }
+
+            }
+
+          </span>
+
+          <span>
+            ({{ productData.rate }} rating)
+          </span>
         </div>
 
         <p class="product-price">

@@ -159,6 +159,14 @@
   gap: 24px;
 }
 
+.filled-star {
+  color: #ff8a00;
+}
+
+.empty-star {
+  color: #cccccc;
+}
+
 @media (max-width: 750px) {
 
   .product-details-page {
@@ -193,6 +201,7 @@
     grid-template-columns: 1fr;
   }
 }
+
 
 @media (max-width: 480px) {
 
