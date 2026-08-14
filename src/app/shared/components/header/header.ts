@@ -32,9 +32,9 @@ export class Header implements OnInit {
   ngOnInit() {
     this.refreshHeader();
 
-    this.router.events.subscribe(() => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-      this.refreshHeader();
+        this.refreshHeader();
       }
     });
   }

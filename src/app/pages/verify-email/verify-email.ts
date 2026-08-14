@@ -71,7 +71,7 @@ export class VerifyEmail implements OnInit {
 
         this.loading.set(false);
 
-        this.router.navigate(['/home']);
+        this.router.navigate(['/profile']);
       },
 
       error: (err) => {
